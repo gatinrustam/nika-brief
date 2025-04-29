@@ -2,7 +2,7 @@
 define("ROOT", dirname(__DIR__));
 
 const WWW = ROOT . "/public";
-const CORE = ROOT . "/vendor/myfrm/core";
+const CORE = ROOT . "/core";
 const CONFIG = ROOT . "/config";
 const APP = ROOT . "/app";
 const CONTROLLES = APP . "/controllers";
