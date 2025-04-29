@@ -1,0 +1,65 @@
+.ui-radio-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ui-radio {
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--color-gray);
+  }
+
+  &__label {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px;
+    position: relative;
+    font-size: 16px;
+    line-height: 1.4;
+    user-select: none;
+  }
+
+  // Скрываем нативный input, но оставляем в DOM для фокуса и доступа
+  &-checker {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--color-green);
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+    display: block;
+    transition: border-color 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  // Добавим точку внутри кружка при :checked
+  &-checker:checked::before {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 10px;
+    height: 10px;
+    background-color: var(--color-green);
+    border-radius: 50%;
+    display: block;
+    transition: background-color 0.2s ease;
+  }
+
+  // Можно добавить ховер эффект
+  &__label:hover .ui-radio-checker {
+    border-color: var(--color-green-hover);
+  }
+
+  &__title {
+    font-size: 18px;
+  }
+
+  &__desc {
+    font-size: 16px;
+    color: #8e8e8e;
+  }
+}

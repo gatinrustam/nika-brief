@@ -1,0 +1,34 @@
+@use '../global/mixins' as *;
+@use '../global/functions' as *;
+
+.customs {
+    display: flex;
+    gap: 8px;
+
+    &__works {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(6, 1fr);
+        grid-column-gap: 24px;
+        grid-row-gap: 24px;
+
+        @include media(md) {
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+        }
+    }
+
+    &__work {
+        list-style: none;
+    }
+
+    &__title {
+        margin-bottom: 8px;
+    }
+
+    &__image {
+        width: 64px;
+        height: 64px;
+        margin-bottom: 8px;
+    }
+}

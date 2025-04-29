@@ -1,0 +1,12 @@
+{
+    "autoload": {
+        "psr-4": {
+            "myfrm\\": "core/classes",
+            "models\\": "app/models"
+        }
+    },
+    "require": {
+        "longman/telegram-bot": "^0.83.1",
+        "phpmailer/phpmailer": "^6.9"
+    }
+}

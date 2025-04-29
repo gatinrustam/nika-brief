@@ -1,0 +1,36 @@
+.image-checkbox-group {  
+    .image-checkbox-item {
+      border: 2px solid var(--color-gray);
+      border-radius: 12px;
+      padding: 8px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s ease;
+  
+      img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
+      }
+  
+      span {
+        display: block;
+        margin-top: 0.5rem;
+        font-size: 14px;
+      }
+  
+      &.selected {
+        border-color: var(--color-green);
+        background: var(--color-green);
+
+        & span {
+          color: var(--color-white);
+        }
+      }
+      
+      &:hover {
+        border-color: var(--color-green);
+        box-shadow: 0 0 0 3px #ddeec4;
+      }
+    }
+  }

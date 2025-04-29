@@ -1,0 +1,19 @@
+@use '../global/mixins' as *;
+@use '../global/functions' as *;
+
+.ui-label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  & span {
+    font-size: 16px;
+  }
+  
+  &-number {
+    padding: 0 rtm(1);
+    color: var(--color-white);
+    font-weight: 500;
+    border-radius: rtm(8);
+  }
+}

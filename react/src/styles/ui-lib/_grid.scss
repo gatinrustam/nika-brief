@@ -1,0 +1,38 @@
+@use '../global/variables/breakpoints' as *;
+@use '../global/variables/columns' as *;
+@use '../global/mixins' as *;
+@use '../global/mixins/grid.mixin' as *;
+
+@include make-default-columns($breakpoints);
+  
+  // Генерация колонок
+  @include make-columns($breakpoints);
+  @include make-columns-start($breakpoints);
+  @include make-columns-end($breakpoints);
+  
+  // .ui {
+  //   &-grid {
+  //     &-container {
+  //       @include make-grid-container($breakpoints);
+  
+  //       display: grid;
+  //     }
+  
+  //     &-gap {
+  //       @include make-gap($breakpoints);
+  //     }
+  //   }
+  
+  //   &-container {
+  //     @include make-container($breakpoints);
+  
+  //     width: 100%;
+  //     margin-right: auto;
+  //     margin-left: auto;
+  
+  //     &-fluid {
+  //       width: 100%;
+  //       padding: 0;
+  //     }
+  //   }
+  // }

@@ -1,0 +1,26 @@
+@use '../global/mixins' as *;
+@use '../global/functions' as *;
+
+.column {
+    padding: var(--mobile-padding);
+    border-radius: var(--mobile-border-radius);
+    background-color: var(--background-container);
+    
+    @include media(xl) {
+        border-radius: var(--desktop-border-radius);
+        padding: var(--desktop-padding);
+    }
+
+    &__title {
+        margin-bottom: 8px;
+    }
+
+    &__description {
+        font-size: 16px;
+        margin-bottom: 24px;
+
+        @include media(md) {
+            font-size: 18px;
+        }
+    }
+}

@@ -1,0 +1,209 @@
+@use '../global/mixins' as *;
+@use '../global/functions' as *;
+
+.button-wrap {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  
+  @include media(md) {
+    width: initial;
+    gap: 24px;
+    flex-direction: row;
+  }
+
+  &--mobile {
+    flex-direction: column-reverse;
+    
+    @include media(md) {
+      width: 100%;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+}
+
+.button-summary {
+  margin-right: auto;
+}
+
+.button {
+	font-family: "Nunito Sans", serif;
+  font-weight: 500;
+  font-style: normal;
+  outline: none;
+  font-size: 18px;
+  padding: 12px 32px 12px;
+  border-radius: 8px;
+  width: 100%;
+  text-decoration: none;
+  text-align: center;
+  background-color: transparent;
+  color: #000000;
+  transition: all 0.3s ease;
+  
+  @include media(xl) {
+    font-size: 18px;
+    width: initial;
+    padding: 14px 24px 14px;
+  }
+
+  &:disabled {
+    background-color: var(--color-gray);
+    color: var(--color-white);
+    cursor: not-allowed;
+  }
+
+  &--white {
+    background-color: var(--color-white);
+    color: var(--color-text);
+  }
+
+  &--gray {
+    background-color: var(--color-gray);
+    color: var(--color-text);
+
+    &:hover {
+      background-color: var(--color-gray-hover);
+    }
+  }
+
+  &--green {
+    background-color: var(--color-green);
+    color: var(--color-white);
+  
+    &:not(:disabled):hover {
+      background-color: var(--color-green-hover);
+    }
+  }
+
+  &--red {
+    background-color: #F44336;
+    color: var(--color-white);
+  
+    &:not(:disabled):hover {
+      background-color: #cd2317;
+    }
+  }
+
+  &--rounded {
+    border-radius: 36px;
+  }
+
+  &--small {
+    font-size: 16px;
+    padding: 6px 12px 6px;
+    width: 100%;
+    
+    @include media(xl) {
+      width: initial;
+      padding: 8px 16px 8px;
+    }
+  }
+
+  &--light {
+    padding: 0;
+    color: #1d1d1d;
+    position: relative;
+    display: flex;
+
+    & span {
+        padding: 0 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 50px;
+        background-color: var(--color-green);
+        border-radius: 36px;
+        width: 100%;
+    }
+
+    &:after {
+        content: '';
+        display: block;
+        background-color: #000000;
+        height: 50px;
+        width: 50px;
+        border-radius: 36px;
+        background-image: url("../images/arrow-right.svg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 50%;
+        flex-shrink: 0;
+    }
+  }
+
+  &--theme {
+    padding: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
+    background-color: var(--color-black);
+    height: 50px;
+    width: 50px;
+    border-radius: 36px;
+    flex-shrink: 0;
+
+    & svg {
+      width: 24px;
+      height: 24px;
+      fill: var(--color-white);
+    }
+  }
+
+  &--icon {
+    padding: 0 16px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+    height: 55px;
+    width: initial;
+    border-radius: 36px;
+
+    @include media(xl) {
+      width: fit-content;
+    }
+
+    &::before {
+      content: none;
+    }
+
+    & svg {
+      width: 24px;
+      height: 24px;
+      fill: var(--color-white);
+    }
+  }
+
+  &--wa {
+    padding: 0 24px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
+    background-color: #25d366;
+    height: 55px;
+    width: 100%;
+    border-radius: 36px;
+
+    @include media(xl) {
+      width: fit-content;
+    }
+
+    &::before {
+      content: none;
+    }
+
+    & svg {
+      width: 24px;
+      height: 24px;
+      fill: var(--color-white);
+    }
+  }
+}

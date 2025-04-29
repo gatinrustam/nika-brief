@@ -1,0 +1,82 @@
+@use '../variables/columns' as *;
+@use '../mixins' as *;
+  
+@mixin make-default-columns($breakpoints) {
+  @each $point-name, $point in $breakpoints {
+    @if $point-name == xxs {
+      [class*='ui-col-'] {
+        grid-column: span $columns-mobile;
+      }
+    } @else if $point-name == xs {
+      @include mediaMin($point) {
+        [class*='ui-col-'] {
+          grid-column: span $columns;
+        }
+      }
+    }
+  }
+}
+  
+  // Генерация колонок
+  @mixin make-columns($breakpoints) {
+    @each $point-name, $point in $breakpoints {
+      @if $point-name == xxs {
+        @for $i from 1 through $columns-mobile {
+          .ui-col-#{$point-name}-#{$i} {
+            grid-column: span #{$i};
+          }
+        }
+      } @else {
+        @include mediaMin($point) {
+          @for $i from 1 through $columns {
+            .ui-col-#{$point-name}-#{$i} {
+              grid-column: span #{$i};
+            }
+          }
+        }
+      }
+    }
+  }
+  
+// Генерация start точки колонок
+@mixin make-columns-start($breakpoints) {
+  @each $point-name, $point in $breakpoints {
+    @if $point-name == xs {
+      @for $i from 1 through $columns-mobile + 1 {
+        .ui-start-#{$point-name}-#{$i} {
+          grid-column-start: #{$i};
+        }
+      }
+    } @else {
+      @include mediaMin($point) {
+        @for $i from 1 through $columns + 1 {
+          .ui-start-#{$point-name}-#{$i} {
+            grid-column-start: #{$i};
+          }
+        }
+      }
+    }
+  }
+}
+  
+// Генерация end точки колонок
+@mixin make-columns-end($breakpoints) {
+  @each $point-name, $point in $breakpoints {
+    @if $point-name == xs {
+      @for $i from 1 through $columns-mobile + 1 {
+        .ui-end-#{$point-name}-#{$i} {
+          grid-column-end: #{$i};
+        }
+      }
+    } @else {
+      @include mediaMin($point) {
+        @for $i from 1 through $columns + 1 {
+          .ui-end-#{$point-name}-#{$i} {
+            grid-column-end: #{$i};
+          }
+        }
+      }
+    }
+  }
+}
+

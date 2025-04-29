@@ -1,0 +1,30 @@
+@mixin fontSize($fs, $lh: null, $fw: null) {
+  @if $fw and $lh {
+    font-size: $fs + px;
+    line-height: $lh + px;
+    font-weight: $fw;
+  } @else if $lh {
+    font-size: $fs + px;
+    line-height: $lh + px;
+  } @else {
+    font-size: $fs + px;
+  }
+}
+
+@mixin textCrop($row, $height: null) {
+overflow: hidden;
+
+@if $row > 1 {
+  display: -webkit-box;
+  -webkit-line-clamp: $row;
+  -webkit-box-orient: vertical;
+
+  @if $height {
+      height: $height;
+  }
+  
+  } @else {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+  }
+}

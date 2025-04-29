@@ -1,0 +1,85 @@
+@use '../variables/breakpoints' as *;
+@use '../variables/columns' as *;
+@use '../variables/container-width' as *;
+@use './' as *; 
+@use '../functions' as *;
+
+
+ @mixin make-container($breakpoints) {
+  @each $point-name, $point in $breakpoints {
+    @if $point-name == xs {
+      @include media(sm-max) {
+        padding-right: 8px;
+        padding-left: 8px;
+      }
+    } @else if $point-name == sm {
+      @include mediaMin($point) {
+        max-width: $width-sm-container;
+      }
+    } @else if $point-name == md {
+      @include mediaMin($point) {
+        max-width: $width-md-container;
+      }
+    } @else if $point-name == lg {
+      @include mediaMin($point) {
+        max-width: $width-lg-container;
+      }
+    } @else if $point-name == xl {
+      @include mediaMin($point) {
+        max-width: $width-xl-container;
+      }
+    } @else if $point-name == xxl {
+      @include mediaMin($point) {
+        max-width: $width-xxl-container;
+      }
+    } @else if $point-name == xxxl {
+      @include mediaMin($point) {
+        max-width: $width-xxxl-container;
+      }
+    } 
+  }
+}
+
+// Миксин для генерации флюид контейнера
+@mixin make-fluid-container($breakpoints) {
+  @each $point-name, $point in $breakpoints {
+    @if $point-name == sm {
+      @include mediaMin($point) {
+        max-width: $width-sm-container;
+      }
+    } @else if $point-name == md {
+      @include mediaMin($point) {
+        max-width: $width-md-container;
+      }
+    } @else if $point-name == lg {
+      @include mediaMin($point) {
+        max-width: $width-lg-container;
+      }
+    } 
+  }
+}
+
+// Миксин для генерации грид контейнера
+@mixin make-grid-container($breakpoints) {
+  grid-template-columns: repeat($columns-mobile, minmax(0, 1fr));
+  @each $point-name, $point in $breakpoints {
+    @if $point-name == sm {
+      @include mediaMin($point) {
+        grid-template-columns: repeat($columns, minmax(0, 1fr));
+      }
+    }
+  }
+}
+
+// Генерация гаттеров
+@mixin make-gap($breakpoints) {
+  @each $point-name, $point in $breakpoints {
+    @if $point-name == xs {
+      grid-gap: $gap-mobile;
+    } @else if $point-name == sm { 
+      @include mediaMin($point) {
+        grid-gap: $gap;
+      }
+    }
+  }
+}

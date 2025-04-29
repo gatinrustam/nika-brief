@@ -1,0 +1,35 @@
+@use '../global/variables/breakpoints' as *;
+@use '../global/mixins/container.mixin' as *;
+
+.ui {
+  &-grid {
+    &-container {
+      display: grid;
+      @include make-grid-container($breakpoints);
+
+    }
+
+    &-gap {
+      @include make-gap($breakpoints);
+    }
+  }
+
+  &-container {
+    @include make-container($breakpoints);
+
+    & {
+      width: 100%;
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+    &-fluid {
+      @include make-fluid-container($breakpoints);
+
+      & {
+        margin-right: auto;
+        margin-left: auto;
+      }
+    }
+  }
+}

@@ -1,0 +1,123 @@
+:root {
+	--background-body: #edeef5;
+	--background-container: #ffffff;
+	--background-container-blur: rgb(255 255 255 / 50%);
+	--background-menu: #edeef5;
+	--background-menu-hover: #ffffff;
+	--background-burger: #121212;
+	--background-gradient: linear-gradient(
+		0deg, 
+		rgb(255, 255, 255) 0%, 
+		rgb(255 255 255 / 80%) 40%, 
+		rgb(255 255 255 / 0%));
+	--color-text: #1d1d1d;
+	--color-menu: #010000;
+	--color-link: #010000;
+	--color-icon: #010000;
+	--color-a: #0679d5;
+	--color-link-border: #a1cb5f;
+	--modal-gradient: linear-gradient(to bottom, #ffffff, rgba(255 255 255 / 10%));
+	// not theme //
+	--color-black: #1d1d1d;
+	--color-gray: #edeef5;
+	--color-gray-hover: #b0b2c3;
+	--color-white: #ffffff;
+	--color-green: #a1cb5f;
+	--color-green-hover: #88ab50;
+	--color-red: #ff6363;
+
+    // gap //
+    --desktop-padding: 36px;
+    --mobile-padding: 16px;
+    --desktop-gap: 16px;
+    --mobile-gap: 8px;
+    --desktop-border-radius: 36px;
+    --mobile-border-radius: 24px;
+
+}
+
+* { 
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	font-family: "Nunito Sans", serif;
+	font-optical-sizing: auto;
+	font-weight: normal;
+	font-style: normal;
+	font-size: 18px;
+	line-height: 1.4em;
+	font-variation-settings:
+	  "wdth" 100,
+	  "YTLC" 500;
+	color: var(--color-text);
+	background-color: var(--background-body);
+	transition: background-color 0.3s ease-in-out;
+}
+
+a {
+	color: var(--color-a);
+}
+
+button {
+	padding: 0;
+	border: 0;
+	outline: none;
+	cursor: pointer;
+
+	&:focus {
+		outline: none;
+	}
+}
+
+img {
+	display: block;
+}
+
+details summary::-webkit-details-marker {
+  display: none
+}
+
+details > summary {
+  list-style: none;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+details summary:before {
+  content: '+';
+	width: 16px;
+	height: 16px;
+	padding: 4px;
+	border-radius: 36px;
+	background-color: #426ab9;
+	color: #ffffff;
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+details[open] summary:before {
+  content: '–';
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+  }
+td {
+	padding: 10px;
+	text-align: left;
+}
+  
+tr:not(:last-child) {
+	border-bottom: 1px solid #edeef5;
+}

@@ -1,0 +1,68 @@
+.progress-bar-wrapper {
+    position: relative;
+    overflow-x: auto; // 👈 важное
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    padding: 5px;
+  
+    &::-webkit-scrollbar {
+      display: none; // скрываем скроллбар на мобилке
+    }
+  }
+  
+  .progress-line {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    right: 5px;
+    height: 4px;
+    background-color: var(--color-gray);
+    transform: translateY(-50%);
+    z-index: 1;
+  
+    &__fill {
+      height: 100%;
+      background-color: var(--color-green);
+      width: 0;
+      transition: width 0.4s ease-in-out;
+      border-radius: 2px;
+    }
+  }
+  
+  .progress-steps {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+    min-width: max-content;
+  
+    @media (max-width: 768px) {
+      gap: 24px; // немного пространства между точками
+    }
+  }
+  
+  .progress-step .progress-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: var(--color-gray);
+    color: #999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 400;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .progress-step.completed .progress-dot {
+    background-color: var(--color-green);
+    color: white;
+  }
+  
+  .progress-step.current .progress-dot {
+    background-color: var(--color-green);
+    box-shadow: 0 0 0 3px #ddeec4;
+    color: white;
+  }

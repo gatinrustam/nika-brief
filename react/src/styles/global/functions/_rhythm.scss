@@ -1,0 +1,9 @@
+// Функция для ритмов
+
+$rhythm-step: 4px;
+
+@function rtm($value) {
+  $result: $rhythm-step * $value;
+
+  @return $result;
+}

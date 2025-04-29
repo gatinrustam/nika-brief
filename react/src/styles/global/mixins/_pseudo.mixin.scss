@@ -1,0 +1,15 @@
+// Миксины для псевдоэлементов
+// TODO: добавить с медиавыражениями для отступов (частый кейс для отступов)
+
+@mixin notLast {
+  &:not(:last-child) {
+    @content;
+  }
+}
+
+@mixin notFirst {
+  &:not(:first-child) {
+    @content;
+  }
+}
+

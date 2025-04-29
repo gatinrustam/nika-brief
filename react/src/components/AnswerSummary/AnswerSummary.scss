@@ -1,0 +1,73 @@
+@use '@/styles/global/mixins' as *;
+@use '@/styles/global/functions' as *;
+
+.answer-summary {
+    height: 100%;
+
+    &__title {
+        margin-bottom: 24px;
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    &__item {
+        list-style: none;
+        padding: 12px 0;
+    }
+
+    &__menu-item {
+        display: flex;
+        width: 100%;
+    }
+
+    &__link {
+        padding: 12px 24px;
+        background-color: var(--background-body);
+        border-radius: 24px;
+        text-decoration: none;
+        width: 100%;
+        text-align: center;
+        color: var(--color-text);
+        
+        &:hover {
+            background-color: var(--color-green);
+            color: var(--color-white);
+        }
+    }
+
+    &__buttons {
+        margin-top: 24px;
+        position: sticky;
+        bottom: 0;
+        padding: 16px;
+        background-color: var(--background-container-blur);
+        backdrop-filter: blur(5px);
+    }
+}
+
+.preview-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+  
+    &__item {
+      width: 100px;
+      text-align: center;
+      font-size: 12px;
+  
+      img {
+        width: 100%;
+        border-radius: 8px;
+      }
+  
+      span {
+        display: block;
+        margin-top: 4px;
+      }
+    }
+  }

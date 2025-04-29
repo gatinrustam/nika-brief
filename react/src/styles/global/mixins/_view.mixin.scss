@@ -1,0 +1,34 @@
+// Миксины для визуала
+// TODO: добавить миксины для отступов по медиавыражениям
+
+// @use '../../abstract/mixins' as *; 
+
+@mixin colors($color: null, $bg: null, $border: null) {
+  @if $color {
+    color: $color;
+  }
+
+  @if $bg {
+    background-color: $bg;
+  }
+
+  @if $border {
+    color: $border;
+  }
+}
+
+// @include bottomMD($indent, $indentMD) {
+//   margin-bottom: $indent;
+
+//   @include media(md) {
+//     margin-bottom: $indentMD;
+//   }
+// }
+
+// @include bottomXL($indent, $indentMD) {
+//   margin-bottom: $indent;
+
+//   @include media(xl) {
+//     margin-bottom: $indentMD;
+//   }
+// }

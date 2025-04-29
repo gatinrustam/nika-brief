@@ -1,0 +1,79 @@
+@use '../global/mixins' as *;
+@use '../global/functions' as *;
+
+.ui-checkbox {
+  display: flex;
+  cursor: pointer;
+
+
+  &-checker {
+    @include rectangle(rtm(4));
+
+    border: 1px solid var(--color-input-gray);
+    border-radius: rtm(1);
+    flex-shrink: 0;
+    margin-top: 2px;
+
+    svg {
+      @include rectangle(rtm(4));
+
+      display: none;
+      color: var(--color-violet);
+    }
+  }
+
+  &-text {
+    margin-left: rtm(2);
+  }
+
+  &:hover,
+  input:checked {
+    + .ui-checkbox-checker {
+      border: 2px solid var(--ui-brand-main);
+      background-color: var(--ui-brand-main);
+      opacity: 1;
+
+      svg {
+        display: block;
+      }
+    }
+  }
+  
+  input[disabled="disabled"] ~ .ui-checkbox-text {
+    color: var(--ui-text-secondary);
+    opacity: 0.6;
+    cursor: default;
+  }
+  
+  input:disabled,
+  input[disabled="disabled"] {
+
+    + .ui-checkbox {
+      &-checker {
+        background-color: var(--ui-stroke-main);
+        border: 2px solid var(--ui-stroke-main);
+        opacity: 1;
+        cursor: default;
+
+        svg {
+          color: var(--ui-text-secondary);
+        }
+      }
+    }
+
+    ~ .ui-checkbox-text {
+        & &-main,
+        & &-secondary {
+          color: var(--ui-text-secondary);
+          opacity: 0.6;
+          cursor: default;
+        }
+    }
+  }
+
+  input ~ .ui-checkbox-text {
+      .ui-checkbox-text-main {
+        color: var(--ui-text-main);
+      }
+  }
+}
