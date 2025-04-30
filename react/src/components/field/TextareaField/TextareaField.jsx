@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFormData } from '@/store/slices/formSlice';
 
-function TextareaField({ id, label, description, minLength }) {
+function TextareaField({ id, label, description, required, minLength }) {
   const dispatch = useDispatch();
   const value = useSelector((state) => state.form.formData[id] || '');
   const [charCount, setCharCount] = useState(value.length);
@@ -21,7 +21,7 @@ function TextareaField({ id, label, description, minLength }) {
 
   return (
     <div className="step textarea-step">
-      <h2 className="step__title title title--heading-3">{label}</h2>
+      <h2 className="step__title title title--heading-3">{label} {required && (<span className="hightlight hightlight--red">*</span>)}</h2>
       {description && <p className="step__description">{description}</p>}
 
       <div className="textarea-wrapper">

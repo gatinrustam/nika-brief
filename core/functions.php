@@ -1,5 +1,5 @@
 <?php
-function abort(int $code = 404, string $message = ''): void
+function abort(int $code = 404, string $message = '', array $errorDetails = []): void
 {
     http_response_code($code);
     header('Content-Type: application/json');
@@ -12,13 +12,17 @@ function abort(int $code = 404, string $message = ''): void
         500 => 'Internal Server Error',
     ];
 
-    // Ответ
-    echo json_encode([
-        'success' => false,
-        'error' => $message ?: ($defaultMessages[$code] ?? 'Unknown error'),
-        'code' => $code,
-    ], JSON_UNESCAPED_UNICODE);
+    $response = [
+        'status' => 'error',
+        'message' => $message ?: ($defaultMessages[$code] ?? 'Unknown error'),
+        'data' => null,
+        'error' => [
+            'code' => $code,
+            'details' => $errorDetails ?: 'No additional details provided',
+        ]
+    ];
 
+    echo json_encode($response, JSON_UNESCAPED_UNICODE);
     die;
 }
 

@@ -99,13 +99,9 @@
     font-family: "Unbounded", serif;
     font-weight: 400;
     font-style: normal;
-    
-    @include media(md) {
-      font-size: 18px;
-    }
 
     @include media(xl) {
-      font-size: 20px;
+      font-size: 18px;
     }
   }
 

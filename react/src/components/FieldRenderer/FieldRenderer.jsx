@@ -15,6 +15,7 @@ function FieldRenderer({ step, value, onChange }) {
     id: step?.id,
     label: step?.label,
     description: step?.description,
+    required: step?.required,
     value,
     onChange: (val) => onChange(step.id, val),
   };

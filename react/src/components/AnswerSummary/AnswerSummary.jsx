@@ -1,7 +1,7 @@
 import React, { useRef, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { resetForm } from '@/store/slices/formSlice';
-import { closeModal } from '@/store/slices/uiSlice';
+import { closeModal, resetModal } from '@/store/slices/uiSlice';
 import briefSteps from '@/data/briefSteps';
 import html2pdf from 'html2pdf.js';
 import './AnswerSummary.scss';
@@ -26,7 +26,8 @@ function AnswerSummary() {
 
   const handleDelete = () => {
     dispatch(resetForm());
-    dispatch(closeModal());
+    dispatch(closeModal('briefIntro'));
+    dispatch(resetModal('briefIntro'));
   };
 
   function prepareFormData(formData) {
@@ -49,31 +50,50 @@ function AnswerSummary() {
       },
       body: JSON.stringify({ data: preparedData }),
     })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.success) {
-          toast.success('Бриф успешно отправлен!');
-          dispatch(resetForm());
-        } else if (data.errors) {
-          toast.error('Ошибка валидации: ' + JSON.stringify(data.errors, null, 2));
-        } else {
-          toast.error('Ошибка отправки: ' + (data.error || 'Неизвестная ошибка'));
+      .then(async (response) => {
+        const data = await response.json().catch(() => ({}));
+    
+        if (!response.ok || data.status === 'error') {
+          const errorMessage =
+            data?.message ||
+            data?.error?.message ||
+            'Неизвестная ошибка';
+    
+          const validationErrors = data?.error?.details;
+    
+          if (validationErrors) {
+            toast.error(
+              'Ошибка валидации: ' +
+                JSON.stringify(validationErrors, null, 2)
+            );
+          } else {
+            toast.error('Ошибка: ' + errorMessage);
+          }
+    
+          throw new Error(errorMessage);
         }
+    
+        return data;
+      })
+      .then((data) => {
+        toast.success('Бриф успешно отправлен!');
+        handleDelete();
       })
       .catch((error) => {
-        toast.error('Ошибка сети или сервера.');
         console.error('Ошибка запроса:', error);
+        // Уже показали toast выше, но можно ещё здесь:
+        // toast.error(error.message);
       });
   }, [formData, dispatch]);
 
   const renderValue = (step, answer) => {
     if (Array.isArray(answer)) {
       return (
-        <div className="preview-gallery">
+        <div className="preview-gallery ui-grid-container ui-grid-gap">
           {answer.map((v) => {
             const option = step.options?.find((opt) => opt.value === v);
             return (
-              <div key={v} className="preview-gallery__item">
+              <div key={v} className="preview-gallery__item ui-col-md-4">
                 {option?.image && <img src={option.image} alt={option.label} />}
                 <span>{option?.label || v}</span>
               </div>
@@ -107,11 +127,11 @@ function AnswerSummary() {
 
   return (
     <div className="answer-summary">
-      <div className="answer-summary__wrapper" ref={pdfRef}>
-        <div className="answer-summary__header">
-          <h2 className="answer-summary__title title title--heading-3">Ваши ответы</h2>
-        </div>
+      <div className="answer-summary__header">
+        <h2 className="answer-summary__title title title--heading-3">Ваши ответы</h2>
+      </div>
 
+      <div className="answer-summary__wrapper" ref={pdfRef}>
         <div className="answer-summary__content">
           <ul className="answer-summary__list">
             {briefSteps.map((step) => {
@@ -130,8 +150,8 @@ function AnswerSummary() {
 
               return (
                 <li className="answer-summary__item" key={step.id}>
-                  <strong>{step.label}</strong><br />
-                  <span>{renderValue(step, answer)}</span>
+                  <h4 className="title title--heading-4">{step.label}</h4>
+                  {renderValue(step, answer)}
                 </li>
               );
             })}

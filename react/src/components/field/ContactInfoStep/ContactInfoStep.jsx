@@ -8,7 +8,7 @@ import { setFormData, selectFormData } from '@/store/slices/formSlice';
 import isEmail from 'validator/lib/isEmail';
 import { isValidPhoneNumber } from 'libphonenumber-js';
 
-function ContactInfoStep({ label, description }) {
+function ContactInfoStep({ label, description, required }) {
   const dispatch = useDispatch();
 
   const contactData = useSelector((state) => selectFormData(state)?.contactInfo || {
@@ -67,7 +67,7 @@ function ContactInfoStep({ label, description }) {
 
   return (
     <div className="step">
-      <h2 className="step__title title title--heading-3">{label}</h2>
+      <h2 className="step__title title title--heading-3">{label} {required && (<span className="hightlight hightlight--red">*</span>)}</h2>
       {description && <p className="step__description">{description}</p>}
 
       <div className="step__group">

@@ -5,6 +5,8 @@ import { validateBriefSteps } from '@/utils/validateBriefSteps';
 
 import { Header, Footer } from '@/components/layout';
 import StepRenderer from '@/components/StepRenderer/StepRenderer';
+import Modal from '@/components/Modal/Modal';
+import InitialModal from '@/components/InitialModal/InitialModal';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import 'tippy.js/dist/tippy.css';
@@ -21,6 +23,9 @@ function App() {
         <StepRenderer />
         <Footer />
       </div>
+      <Modal modalKey="briefIntro">
+        <InitialModal />
+      </Modal>
       <ToastContainer />
     </main>
   );

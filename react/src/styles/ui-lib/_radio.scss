@@ -1,3 +1,6 @@
+@use '../global/mixins' as *;
+@use '../global/functions' as *;
+
 .ui-radio-list {
   display: flex;
   flex-direction: column;
@@ -60,7 +63,12 @@
   }
 
   &__desc {
-    font-size: 16px;
+    font-size: 14px;
+    line-height: 120%;
     color: #8e8e8e;
+
+    @include media(md) {
+      font-size: 16px;
+    }
   }
 }

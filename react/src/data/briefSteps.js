@@ -31,14 +31,14 @@ const briefSteps = [
         description: 'Сайт с каталогом товаров, системой корзины, онлайн-оплатой и фильтрацией.' 
       }
     ],
-    required: false
+    required: true
   },  
   {
     id: 'businessScope',
     type: 'textarea',
     label: 'Расскажите о вашей сфере деятельности',
-    description: 'Опишите в двух словах, чем вы занимаетесь — это важно для точной формулировки предложений.',
-    required: false
+    description: 'Кратко опишите вашу сферу — это поможет лучше адаптировать предложения под ваш бизнес.',
+    required: true
   },
   {
     id: 'products',
@@ -66,7 +66,7 @@ const briefSteps = [
     type: 'textarea',
     label: 'Основные разделы или блоки сайта',
     description: 'Перечислите, какие страницы и разделы должны быть на сайте (например: О компании, Услуги, Контакты).',
-    required: true
+    required: false
   },
   {
     id: 'competitors',
@@ -87,9 +87,9 @@ const briefSteps = [
     type: 'radio',
     label: 'Есть ли у вас логотип?',
     options: [
-      { value: 'yes', label: 'Да, есть', description: 'Логотип уже готов.' },
-      { value: 'needDesign', label: 'Нет, нужно разработать', description: 'Требуется создать новый логотип.' },
-      { value: 'inProgress', label: 'В процессе', description: 'Логотип в разработке.' }
+      { value: 'yes', label: 'Да, есть', description: 'Логотип уже готов' },
+      { value: 'needDesign', label: 'Нет, нужно разработать', description: 'Требуется создать новый логотип' },
+      { value: 'inProgress', label: 'В процессе', description: 'Логотип в разработке' }
     ],
     required: true
   },
@@ -99,21 +99,21 @@ const briefSteps = [
     label: 'У вас уже есть тексты для сайта?',
     description: 'Это поможет понять, сколько времени нужно будет на написание контента.',
     options: [
-      { value: 'ready', label: 'Да, всё готово', description: 'Вы предоставите все тексты.' },
-      { value: 'needCopywriting', label: 'Нет, нужно написать', description: 'Потребуется разработка текстов.' },
-      { value: 'partially', label: 'Частично, нужно доработать', description: 'Нужна редактура или дополнение.' }
+      { value: 'ready', label: 'Да, всё готово', description: 'Есть тексты и структура для сайта' },
+      { value: 'partially', label: 'Частично, нужно доработать', description: 'Есть тексты, но нужна редактура или дополнение' },
+      { value: 'needCopywriting', label: 'Нет, нужно написать', description: 'Потребуется написание текстов' }
     ],
     required: true
   },
   {
     id: 'domain',
     type: 'domain-radio',
-    label: 'У вас есть домен?',
-    description: 'Это нужно для размещения сайта. Мы можем помочь с покупкой домена.',
+    label: 'У вас есть домен и хостинг?',
+    description: 'Это нужно для размещения сайта. Мы готовы помочь с покупкой домена и хостинга.',
     options: [
-      { value: 'noDomainButWillBuy', label: 'Нет, но я куплю его', description: 'Вы купите домен самостоятельно.' },
-      { value: 'needHelpToBuy', label: 'Нет, нужна помощь с покупкой', description: 'Мы поможем выбрать и купить домен.' },
-      { value: 'hasDomain', label: 'Да', description: 'У вас уже есть домен.' }
+      { value: 'noDomainButWillBuy', label: 'Нет, но я куплю его', description: 'Вы купите домен и хостинг самостоятельно' },
+      { value: 'needHelpToBuy', label: 'Нет, нужна помощь с покупкой', description: 'Мы поможем выбрать хостинг и купить домен' },
+      { value: 'hasDomain', label: 'Да', description: 'Домен и хостинг уже есть' }
     ],
     required: true
   },
@@ -206,13 +206,6 @@ const briefSteps = [
     required: true
   },
   {
-    id: 'colors',
-    type: 'textarea',
-    label: 'Какие цвета использовать? Или у вас есть брендбук?',
-    description: 'Опишите предпочтения по цветам или прикрепите брендбук.',
-    required: true
-  },
-  {
     id: 'siteMaintenance',
     type: 'radio',
     label: 'Кто будет заниматься обновлением сайта?',
@@ -241,9 +234,9 @@ const briefSteps = [
     label: 'На какой технологии вы хотите сайт?',
     description: 'Выберите предпочтительную платформу.',
     options: [
-      { label: 'Tilda', value: 'tilda', description: 'Конструктор сайтов.' },
-      { label: 'WordPress', value: 'wordpress', description: 'CMS для гибких решений.' },
-      { label: 'Не знаю', value: 'unknown', description: 'Посоветуйтесь с нами.' }
+      { label: 'Tilda', value: 'tilda', description: 'Удобный конструктор сайтов' },
+      { label: 'WordPress', value: 'wordpress', description: 'CMS для гибких и масштабируемых решений' },
+      { label: 'Не знаю', value: 'unknown', description: 'Нужна помощь в этом вопросе' }
     ],
     required: true
   },
@@ -251,7 +244,7 @@ const briefSteps = [
     id: 'contactInfo',
     type: 'contact-info',
     label: 'Контактные данные для сайта',
-    description: 'Укажите телефон, email и другие контакты для размещения на сайте.',
+    description: 'Укажите телефон, email и другие контакты для размещения на сайте. В дополнительном поле можно указать мессенджеры и соцсети.',
     required: true
   }
 ];

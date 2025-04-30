@@ -50,6 +50,17 @@ class Validator {
     }
   }
 
+  public function getErrorMessageString(): string {
+    $messages = [];
+    foreach ($this->errors as $field => $errors) {
+      $label = ucfirst($field); // мапа для замены технических имён
+      foreach ($errors as $msg) {
+        $messages[] = "$label: $msg";
+      }
+    }
+    return implode('. ', $messages);
+  }
+
   public function getErrors() {
     return $this->errors;
   }

@@ -1,24 +1,19 @@
 <?php
 
 use myfrm\Validator;
-use myfrm\App;
 use models\BriefModel;
 
 header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-  http_response_code(405);
-  echo json_encode(['error' => 'Метод не поддерживается']);
-  exit;
+    abort(405, 'Метод не поддерживается');
 }
 
 $input = file_get_contents('php://input');
 $data = json_decode($input, true);
 
 if (!$data || !isset($data['data'])) {
-  http_response_code(400);
-  echo json_encode(['error' => 'Некорректные данные']);
-  exit;
+    abort(400, 'Некорректные данные', ['input' => $data]);
 }
 
 $form = $data['data'];
@@ -28,46 +23,45 @@ $validator = new Validator();
 $validation = $validator->validate($form, [
     'name' => ['required' => true, 'max' => 255],
     'email' => [
-      'required' => true,
-      'email' => true,
-      'max' => 255,
-      'unique' => 'brief_submissions:email'  // Добавляем проверку уникальности
+        'required' => true,
+        'email' => true,
+        'max' => 255,
+        'unique' => 'brief_submissions:email'
     ],
     'siteType' => ['required' => true],
-  ]);
+]);
 
 if ($validation->hasErrors()) {
-  http_response_code(422);
-  echo json_encode(['errors' => $validation->getErrors()]);
-  exit;
+    abort(422, 'Ошибка валидации', $validation->getErrorMessageString());
 }
 
 try {
-  $briefModel = new BriefModel();
+    $briefModel = new BriefModel();
 
-  if ($briefModel->hasEmail($form['email'])) {
-    http_response_code(409);
-    echo json_encode(['error' => 'Заявка с таким email уже существует']);
-    exit;
-  }
+    if ($briefModel->hasEmail($form['email'])) {
+        abort(409, 'Заявка с таким email уже существует');
+    }
 
-  $saved = $briefModel->createBrief([
-    'name' => $form['name'] ?? null,
-    'email' => $form['email'] ?? null,
-    'site_type' => $form['siteType'] ?? null,
-    'domain_choice' => $form['domain']['choice'] ?? null,
-    'payload' => json_encode($form, JSON_UNESCAPED_UNICODE),
-    'created_at' => date('Y-m-d H:i:s')
-  ]);
+    $saved = $briefModel->createBrief([
+        'name' => $form['name'] ?? null,
+        'email' => $form['email'] ?? null,
+        'site_type' => $form['siteType'] ?? null,
+        'domain_choice' => $form['domain']['choice'] ?? null,
+        'payload' => json_encode($form, JSON_UNESCAPED_UNICODE),
+        'created_at' => date('Y-m-d H:i:s')
+    ]);
 
-  if (!$saved) {
-    http_response_code(500);
-    echo json_encode(['error' => 'Не удалось сохранить бриф']);
-    exit;
-  }
+    if (!$saved) {
+        abort(500, 'Не удалось сохранить бриф');
+    }
 
-  echo json_encode(['success' => true]);
+    echo json_encode([
+        'status' => 'success',
+        'message' => 'Бриф успешно сохранён',
+        'data' => null,
+        'error' => null
+    ], JSON_UNESCAPED_UNICODE);
+
 } catch (Exception $e) {
-  http_response_code(500);
-  echo json_encode(['error' => 'Ошибка сервера', 'details' => $e->getMessage()]);
+    abort(500, 'Ошибка сервера', ['exception' => $e->getMessage()]);
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setFormData } from '@/store/slices/formSlice';
 
-function RadioGroupField({ id, label, description, options }) {
+function RadioGroupField({ id, label, description, required, options }) {
   const dispatch = useDispatch();
   const value = useSelector((state) => state.form.formData[id] || '');
 
@@ -12,7 +12,7 @@ function RadioGroupField({ id, label, description, options }) {
 
   return (
     <div className="step">
-      <h2 className="step__title title title--heading-3">{label}</h2>
+      <h2 className="step__title title title--heading-3">{label} {required && (<span className="hightlight hightlight--red">*</span>)}</h2>
       {description && <p className="step__description">{description}</p>}
 
       <div className="ui-radio-list">

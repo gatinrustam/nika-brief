@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { closeModal, selectIsModalOpen } from '@/store/slices/uiSlice';
 import './Modal.scss';
 
-const Modal = ({ children }) => {
+const Modal = ({ modalKey, children }) => {
   const dispatch = useDispatch();
-  const isOpen = useSelector(selectIsModalOpen);
+  const isOpen = useSelector(selectIsModalOpen(modalKey));
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : 'initial';
@@ -14,11 +14,15 @@ const Modal = ({ children }) => {
     };
   }, [isOpen]);
 
-  const handleClose = () => dispatch(closeModal());
+  const handleClose = () => {
+    dispatch(closeModal(modalKey));
+  };
+
+  if (!isOpen) return null;
 
   return (
     <div
-      className={`modal-wrapper${isOpen ? ' modal-wrapper--active' : ''}`}
+      className="modal-wrapper modal-wrapper--active"
       onClick={(e) => {
         if (e.target.classList.contains('modal-wrapper')) {
           handleClose();
@@ -26,7 +30,9 @@ const Modal = ({ children }) => {
       }}
     >
       <div className="modal">
-        <button className="modal__close" onClick={handleClose}>×</button>
+        <button className="modal__close" onClick={handleClose}>
+          ×
+        </button>
         <div className="modal__content">
           {children}
         </div>
