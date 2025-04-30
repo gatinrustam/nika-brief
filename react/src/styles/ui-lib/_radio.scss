@@ -52,6 +52,7 @@
   // Можно добавить ховер эффект
   &__label:hover .ui-radio-checker {
     border-color: var(--color-green-hover);
+    box-shadow: 0 0 0 3px #ddeec4;
   }
 
   &__title {

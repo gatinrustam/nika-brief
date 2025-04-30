@@ -118,25 +118,53 @@ const briefSteps = [
     required: true
   },
   {
-    id: 'styleExamples',
-    type: 'image-multiselect',
-    label: 'Какие стили вам нравятся?',
-    description: 'Выберите визуальные референсы для понимания ваших предпочтений. Это поможет нам создать уникальный дизайн для вас.',
+    id: "styleExamples",
+    type: "image-multiselect",
+    label: "Какие стили вам нравятся?",
+    description: "Выберите визуальные референсы для понимания ваших предпочтений. Это поможет нам создать уникальный дизайн для вас.",
     options: [
-      { label: 'Минимализм', value: 'minimal', image: '/images/1.webp' },
-      { label: 'Современный', value: 'modern', image: '/images/2.webp' },
-      { label: 'Креативный', value: 'creative', image: '/images/3.webp' },
-      { label: 'Креативный 2', value: 'creative2', image: '/images/4.webp' },
-      { label: 'Креативный 3', value: 'creative3', image: '/images/5.webp' },
-      { label: 'Креативный 3', value: 'creative3', image: '/images/5.webp' },
-      { label: 'Креативный 3', value: 'creative3', image: '/images/5.webp' },
-      { label: 'Креативный 3', value: 'creative3', image: '/images/5.webp' },
-      { label: 'Креативный 3', value: 'creative3', image: '/images/5.webp' },
-      { label: 'Креативный 3', value: 'creative3', image: '/images/5.webp' },
-      { label: 'Креативный 3', value: 'creative3', image: '/images/5.webp' },
-      { label: 'Креативный 3', value: 'creative3', image: '/images/5.webp' },
+      {
+        value: "minimal",
+        image: "/images/1.webp",
+      },
+      {
+        value: "modern",
+        image: "/images/2.webp",
+      },
+      {
+        value: "creative",
+        image: "/images/3.webp",
+      },
+      {
+        value: "corporate",
+        image: "/images/4.webp",
+      },
+      {
+        value: "elegant",
+        image: "/images/5.webp",
+      },
+      {
+        value: "travel",
+        image: "/images/6.webp",
+      },
+      {
+        value: "eco",
+        image: "/images/7.webp",
+      },
+      {
+        value: "fashion",
+        image: "/images/8.webp",
+      },
+      {
+        value: "functional",
+        image: "/images/9.webp",
+      },
+      {
+        value: "tech",
+        image: "/images/10.webp",
+      }
     ],
-    required: true
+    "required": true
   },
   {
     id: 'fontFamily',
@@ -165,13 +193,6 @@ const briefSteps = [
     required: true
   },
   {
-    id: 'colors',
-    type: 'textarea',
-    label: 'Какие цвета использовать? Или у вас есть брендбук?',
-    description: 'Опишите предпочтения по цветам или прикрепите брендбук.',
-    required: true
-  },
-  {
     id: 'siteFunctions',
     type: 'image-multiselect',
     label: 'Необходимый функционал на сайте',
@@ -180,11 +201,15 @@ const briefSteps = [
       { label: 'Форма обратной связи', value: 'feedback-form', image: '/images/blocks/feedback.png' },
       { label: 'Слайдер', value: 'slider', image: '/images/blocks/slider.png' },
       { label: 'Фотогалерея', value: 'gallery', image: '/images/blocks/gallery.png' },
-      { label: 'Callback-кнопка', value: 'callback', image: '/images/functions/callback.png' },
-      { label: 'Онлайн-оплата', value: 'payment', image: '/images/functions/payment.png' },
-      { label: 'Фильтр товаров', value: 'filter', image: '/images/blocks/filter.png' },
-      { label: 'Личный кабинет', value: 'personal-account', image: '/images/functions/personal-account.png' }
+      { label: 'Фильтр товаров', value: 'filter', image: '/images/blocks/filter.png' }
     ],
+    required: true
+  },
+  {
+    id: 'colors',
+    type: 'textarea',
+    label: 'Какие цвета использовать? Или у вас есть брендбук?',
+    description: 'Опишите предпочтения по цветам или прикрепите брендбук.',
     required: true
   },
   {

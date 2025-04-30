@@ -1,5 +1,4 @@
 .progress-bar-wrapper {
-    position: relative;
     overflow-x: auto; // 👈 важное
     -webkit-overflow-scrolling: touch;
     width: 100%;
@@ -18,7 +17,7 @@
     height: 4px;
     background-color: var(--color-gray);
     transform: translateY(-50%);
-    z-index: 1;
+    z-index: -1;
   
     &__fill {
       height: 100%;
@@ -33,7 +32,7 @@
     display: flex;
     justify-content: space-between;
     position: relative;
-    z-index: 2;
+    z-index: 3;
     min-width: max-content;
   
     @media (max-width: 768px) {

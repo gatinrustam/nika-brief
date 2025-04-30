@@ -33,7 +33,7 @@ function NavigationButtons() {
           <ProgressIndicator currentStep={currentStep} totalSteps={briefSteps.length} />
   
           <Tippy content={tippyContent} placement="top" trigger="mouseenter focus">
-            <div>
+            <div className="button-wrap__inner">
               <button className="button button--green" disabled={!isValid} onClick={handleNext}>
                 {isNotRequired ? "Далее" : "Пропустить"}
               </button>

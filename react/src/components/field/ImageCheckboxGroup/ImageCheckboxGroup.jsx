@@ -28,7 +28,7 @@ function ImageCheckboxGroup({ id, label, description, options }) {
             onClick={() => handleToggle(opt.value)}
           >
             {opt.image && <img src={opt.image} alt={opt.label} />}
-            <span>{opt.label}</span>
+            {opt.label && <span>{opt.label}</span>}
           </div>
         ))}
       </div>

@@ -20,9 +20,9 @@
     transition: background-color 0.3s ease-in-out;
     border-radius: var(--mobile-border-radius);
     width: 100%;
-    min-height: 71px;
     
     @include media(md) {
+      min-height: 71px;
       border-radius: var(--desktop-border-radius);
     }
     
@@ -32,15 +32,32 @@
   }
 
   &__title {
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 500;
     padding-left: 24px;
     margin-left: 24px;
     border-left: 1px solid #ececec;
+    
+    @include media(md) {
+      font-size: 24px;
+    }
+  }
+
+  &__title-desktop {
+    display: none;
+    
+    @include media(md) {
+      display: inline;
+    }
   }
 
   &__logo {
     margin-left: 16px;
+    width: 80px;
+    
+    @include media(md) {
+      width: 120px;
+    }
   }
 
   &__button {
