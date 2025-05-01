@@ -26,6 +26,16 @@ function abort(int $code = 404, string $message = '', array $errorDetails = []):
     die;
 }
 
+function success(string $message, mixed $data = null): void {
+  echo json_encode([
+      'status' => 'success',
+      'message' => $message,
+      'data' => $data,
+      'error' => null
+  ], JSON_UNESCAPED_UNICODE);
+  exit;
+}
+
 function load(array $fillable = [])
 {
   $data = [];

@@ -32,21 +32,18 @@ $validation = $validator->validate($form, [
 ]);
 
 if ($validation->hasErrors()) {
-    abort(422, 'Ошибка валидации', $validation->getErrorMessageString());
+    abort(422, 'Ошибка', $validation->getErrors());
 }
 
 try {
     $briefModel = new BriefModel();
-
-    if ($briefModel->hasEmail($form['email'])) {
-        abort(409, 'Заявка с таким email уже существует');
-    }
 
     $saved = $briefModel->createBrief([
         'name' => $form['name'] ?? null,
         'email' => $form['email'] ?? null,
         'site_type' => $form['siteType'] ?? null,
         'domain_choice' => $form['domain']['choice'] ?? null,
+        'markdown' => $form['markdown'] ?? null,
         'payload' => json_encode($form, JSON_UNESCAPED_UNICODE),
         'created_at' => date('Y-m-d H:i:s')
     ]);
@@ -55,12 +52,7 @@ try {
         abort(500, 'Не удалось сохранить бриф');
     }
 
-    echo json_encode([
-        'status' => 'success',
-        'message' => 'Бриф успешно сохранён',
-        'data' => null,
-        'error' => null
-    ], JSON_UNESCAPED_UNICODE);
+    success('Бриф успешно отправлен');
 
 } catch (Exception $e) {
     abort(500, 'Ошибка сервера', ['exception' => $e->getMessage()]);

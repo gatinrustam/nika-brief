@@ -67,7 +67,7 @@ function ContactInfoStep({ label, description, required }) {
 
   return (
     <div className="step">
-      <h2 className="step__title title title--heading-3">{label} {required && (<span className="hightlight hightlight--red">*</span>)}</h2>
+      <h2 className="step__title title title--heading-3">{label}&nbsp;{required && (<span className="hightlight hightlight--red">*</span>)}</h2>
       {description && <p className="step__description">{description}</p>}
 
       <div className="step__group">

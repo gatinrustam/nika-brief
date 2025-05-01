@@ -8,9 +8,20 @@ const Modal = ({ modalKey, children }) => {
   const isOpen = useSelector(selectIsModalOpen(modalKey));
 
   useEffect(() => {
-    document.body.style.overflow = isOpen ? 'hidden' : 'initial';
+    const setVh = () => {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    };
+
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+      setVh();
+      window.addEventListener('resize', setVh);
+    }
+
     return () => {
       document.body.style.overflow = 'initial';
+      window.removeEventListener('resize', setVh);
     };
   }, [isOpen]);
 

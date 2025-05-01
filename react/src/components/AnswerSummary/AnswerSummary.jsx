@@ -2,6 +2,8 @@ import React, { useRef, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { resetForm } from '@/store/slices/formSlice';
 import { closeModal, resetModal } from '@/store/slices/uiSlice';
+import { handleApiResponse } from '@/utils/handleApiResponse';
+import { formToMarkdown } from '@/utils/formToMarkdown';
 import briefSteps from '@/data/briefSteps';
 import html2pdf from 'html2pdf.js';
 import './AnswerSummary.scss';
@@ -34,6 +36,7 @@ function AnswerSummary() {
     const { contactInfo = {}, ...rest } = formData;
     return {
       ...rest,
+      name: contactInfo.name || 'Имя не указано',
       phone: contactInfo.phone || '',
       email: contactInfo.email || '',
       extraContacts: contactInfo.extraContacts || ''
@@ -42,47 +45,25 @@ function AnswerSummary() {
   
   const handleSend = useCallback(() => {
     const preparedData = prepareFormData(formData);
+    const markdownPayload = formToMarkdown(formData);
   
-    fetch('/api/submit', {
+    const payload = {
+      ...preparedData,
+      markdown: markdownPayload,
+    };
+  
+    fetch('http://localhost:8080/api/submit', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ data: preparedData }),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ data: payload }),
     })
-      .then(async (response) => {
-        const data = await response.json().catch(() => ({}));
-    
-        if (!response.ok || data.status === 'error') {
-          const errorMessage =
-            data?.message ||
-            data?.error?.message ||
-            'Неизвестная ошибка';
-    
-          const validationErrors = data?.error?.details;
-    
-          if (validationErrors) {
-            toast.error(
-              'Ошибка валидации: ' +
-                JSON.stringify(validationErrors, null, 2)
-            );
-          } else {
-            toast.error('Ошибка: ' + errorMessage);
-          }
-    
-          throw new Error(errorMessage);
-        }
-    
-        return data;
-      })
-      .then((data) => {
+      .then(handleApiResponse)
+      .then(() => {
         toast.success('Бриф успешно отправлен!');
         handleDelete();
       })
       .catch((error) => {
         console.error('Ошибка запроса:', error);
-        // Уже показали toast выше, но можно ещё здесь:
-        // toast.error(error.message);
       });
   }, [formData, dispatch]);
 

@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import {
   RadioGroupField,
   ImageCheckboxGroup,
@@ -11,6 +13,10 @@ import {
 import { motion } from 'framer-motion';
 
 function FieldRenderer({ step, value, onChange }) {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [step?.id]);
+
   const commonProps = {
     id: step?.id,
     label: step?.label,

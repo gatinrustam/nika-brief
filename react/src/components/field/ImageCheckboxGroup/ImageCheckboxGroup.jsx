@@ -17,17 +17,17 @@ function ImageCheckboxGroup({ id, label, description, required, options }) {
 
   return (
     <div className="step">
-      <h2 className="step__title title title--heading-3">{label} {required && (<span className="hightlight hightlight--red">*</span>)}</h2>
+      <h2 className="step__title title title--heading-3">{label}&nbsp;{required && (<span className="hightlight hightlight--red">*</span>)}</h2>
       {description && <p className="step__description">{description}</p>}
 
       <div className="image-checkbox-group ui-grid-container ui-grid-gap">
         {options.map((opt) => (
           <div
             key={opt.value}
-            className={`ui-col-xxs-2 ui-col-md-4 image-checkbox-item ${value.includes(opt.value) ? 'selected' : ''}`}
+            className={`ui-col-md-6 ui-col-xl-4 image-checkbox-item ${value.includes(opt.value) ? 'selected' : ''}`}
             onClick={() => handleToggle(opt.value)}
           >
-            {opt.image && <img src={opt.image} alt={opt.label} />}
+            {opt.image && <img src={opt.image} alt={opt.label} loading="lazy" />}
             {opt.label && <span>{opt.label}</span>}
           </div>
         ))}

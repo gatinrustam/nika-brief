@@ -17,26 +17,21 @@ class BriefModel
     public function createBrief(array $data): bool
     {
         $sql = "INSERT INTO brief_submissions 
-                (name, email, site_type, domain_choice, payload, created_at)
-                VALUES (:name, :email, :site_type, :domain_choice, :payload, :created_at)";
+                (name, email, site_type, domain_choice, markdown, payload, created_at)
+                VALUES (:name, :email, :site_type, :domain_choice, :markdown, :payload, :created_at)";
 
         $params = [
             'name' => $data['name'],
             'email' => $data['email'],
             'site_type' => $data['site_type'],
             'domain_choice' => $data['domain_choice'],
+            'markdown' => $data['markdown'],
             'payload' => $data['payload'],
             'created_at' => $data['created_at'],
         ];
 
         $result = $this->db->query($sql, $params);
         return $result && $this->db->rowCount() > 0;
-    }
-
-    public function hasEmail(string $email): bool
-    {
-        $this->db->query("SELECT id FROM brief_submissions WHERE email = ? LIMIT 1", [$email]);
-        return (bool) $this->db->find();
     }
 
     public function getBriefById(int $id)

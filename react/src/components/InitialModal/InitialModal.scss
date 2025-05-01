@@ -1,15 +1,22 @@
+@use '@/styles/global/mixins' as *;
+@use '@/styles/global/functions' as *;
+
 .initial-block {
     margin-top: 24px;
     margin-bottom: 24px;
-    gap: 36px;
+
+    @include media(md) {
+        gap: 36px;
+    }
 
     &__item {
         display: flex;
         gap: 24px;
         flex-direction: column;
         align-items: center;
+        margin-bottom: 16px;
 
-        & svg {
+        & img {
             width: 64px;
             height: 64px;
             display: block;

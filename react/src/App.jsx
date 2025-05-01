@@ -18,7 +18,7 @@ function App() {
 
   return (
     <main className="app ui-container ui-grid-container ui-grid-gap">
-      <div className="ui-col-md-12 ui-start-xl-3 ui-end-xl-11 ui-start-xxxl-5 ui-end-xxxl-9">
+      <div className="ui-col-md-12 ui-start-xxl-3 ui-end-xxl-11 ui-start-xxxl-3 ui-end-xxxl-11">
         <Header />
         <StepRenderer />
         <Footer />
